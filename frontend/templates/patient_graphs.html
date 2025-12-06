@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Data Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            width: 80%;
+            margin: 0 auto 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>📊 Patient Data Visualization</h2>
+
+    <div class="chart-container">
+        <canvas id="cancerTypeChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="ageDistributionChart"></canvas>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="tumorSizeChart"></canvas>
+    </div>
+
+    <script>
+        const cancerTypeData = {{ cancer_type_data | tojson }};
+        const ageData = {{ age_data | tojson }};
+        const tumorSizeData = {{ tumor_size_data | tojson }};
+        const patientLabels = {{ patient_labels | tojson }};
+
+        // Cancer Type Pie Chart
+        new Chart(document.getElementById("cancerTypeChart"), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(cancerTypeData),
+                datasets: [{
+                    data: Object.values(cancerTypeData),
+                    backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#9b59b6', '#f1c40f'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Cancer Type Distribution' }
+                }
+            }
+        });
+
+        // Age Distribution Bar Chart
+        new Chart(document.getElementById("ageDistributionChart"), {
+            type: 'bar',
+            data: {
+                labels: patientLabels,
+                datasets: [{
+                    label: 'Age',
+                    data: ageData,
+                    backgroundColor: '#2980b9'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Age Distribution' }
+                }
+            }
+        });
+
+        // Tumor Size Chart
+        new Chart(document.getElementById("tumorSizeChart"), {
+            type: 'bar',
+            data: {
+                labels: patientLabels,
+                datasets: [{
+                    label: 'Tumor Size (cm)',
+                    data: tumorSizeData,
+                    backgroundColor: '#e67e22'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Tumor Size Comparison' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

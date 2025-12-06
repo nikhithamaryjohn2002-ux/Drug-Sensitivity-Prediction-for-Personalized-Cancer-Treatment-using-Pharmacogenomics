@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f4f7;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(to right, #0b79e8, #3da8ff);
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://wallpaper.dog/large/854284.jpg') no-repeat center center/cover;
+      z-index: -1;
+      filter: brightness(0.9);
+    }
+
+    .dashboard-container {
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding-top: 40px;
+      height: calc(100vh - 100px);
+    }
+
+    .dashboard-box {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 360px;
+      margin-top: 30px; /* Moves it slightly above */
+    }
+
+    .doctor-image {
+      width: 180px;
+      margin-bottom: 25px;
+    }
+
+    .dashboard-box h2 {
+      font-size: 26px;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 14px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 100%;
+      margin-bottom: 15px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
+    }
+
+    .button:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+    }
+
+    .logout-btn {
+      background-color: #e74c3c;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+    }
+
+    @media (max-width: 500px) {
+      .dashboard-box {
+        width: 90%;
+        padding: 30px 20px;
+      }
+
+      .doctor-image {
+        width: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome Back, Dr. {{ doctor_name }}!</h1>
+  </header>
+
+  <div class="background-image"></div>
+
+  <div class="dashboard-container">
+    <div class="dashboard-box">
+      <img src="https://openclipart.org/image/2400px/svg_to_png/284473/CDC-femaledoc.png" alt="Doctor" class="doctor-image">
+      <h2>Doctor Dashboard</h2>
+      <div class="button-container">
+        <a href="{{ url_for('patient_details') }}" class="button">Past Patient Reports</a>
+        <a href="{{ url_for('add_report') }}" class="button">Add New Report</a>
+        <a href="{{ url_for('logout') }}" class="button logout-btn">Logout</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

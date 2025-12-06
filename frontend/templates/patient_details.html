@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            padding: 0;
+
+            /* Background image styles */
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230707/pngtree-d-rendering-of-health-content-medical-bottle-and-tablet-chart-for-image_3788536.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        header {
+            background-color: rgba(11, 121, 232, 0.9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .card-container {
+            max-width: 1000px;
+            margin: 80px auto 30px;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            width: calc(50% - 20px);
+            box-sizing: border-box;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .card p {
+            margin: 6px 0;
+        }
+
+        .card-buttons {
+            margin-top: 15px;
+        }
+
+        .card-buttons a,
+        .card-buttons form button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .card-buttons form button {
+            background-color: #e74c3c;
+        }
+
+        .card-buttons a:hover {
+            background-color: #2980b9;
+        }
+
+        .card-buttons form button:hover {
+            background-color: #c0392b;
+        }
+
+        .filter-form {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .filter-form form {
+            display: inline-block;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .filter-form label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .filter-form input[type="date"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .filter-form button,
+        .filter-form a {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+        }
+
+        .filter-form button {
+            background-color: #3498db;
+        }
+
+        .filter-form a {
+            background-color: #2ecc71;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Patient Records</h1>
+</header>
+
+<div class="filter-form">
+    <form method="GET" action="/patient_details">
+        <div>
+            <label for="start_date">From Date:</label>
+            <input type="date" name="start_date" value="{{ start_date or '' }}" required>
+        </div>
+
+        <div>
+            <label for="end_date">To Date:</label>
+            <input type="date" name="end_date" value="{{ end_date or '' }}" required>
+        </div>
+
+        <div>
+            <button type="submit">Filter</button>
+
+            <a href="/download_patient_excel?start_date={{ start_date }}&end_date={{ end_date }}">
+                Download Excel
+            </a>
+        </div>
+    </form>
+</div>
+
+{% if patients %}
+    <div class="card-container">
+        {% for patient in patients %}
+            <div class="card">
+                <h3>Patient ID: {{ patient[1] }}</h3>
+                <p><strong>Age:</strong> {{ patient[2] }}</p>
+                <p><strong>Gender:</strong> {{ patient[3] }}</p>
+                <p><strong>Cancer Type:</strong> {{ patient[4] }}</p>
+                <p><strong>Date:</strong> {{ patient[20] }}</p>
+
+                <div class="card-buttons">
+                    <a href="{{ url_for('view_patient', patient_id=patient[1]) }}">View Details</a>
+                    <form method="POST" action="{{ url_for('delete_patient', patient_id=patient[2]) }}" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p style="text-align: center; margin-top: 100px;">No patients found.</p>
+{% endif %}
+
+</body>
+</html>

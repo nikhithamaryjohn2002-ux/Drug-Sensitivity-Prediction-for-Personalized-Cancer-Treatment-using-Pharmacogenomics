@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Treatment Prediction Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #004080;
+            color: #fff;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            padding: 30px 40px;
+            max-width: 900px;
+            margin: auto;
+            background-color: #e0f7fa;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 16px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .prediction {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d2d2d;
+            padding: 15px;
+            background-color: #e0f7fa;
+            border-radius: 8px;
+        }
+
+        .prediction strong {
+            color: #004080;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            header {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    Predictive Oncology Form
+</header>
+
+<div class="container">
+    <form method="POST">
+        <!-- Patient Info -->
+        <div class="section">
+            <h3>Patient Information</h3>
+            <label>Age:</label>
+            <input type="text" name="Age" value="55" required>
+
+            <label>Gender:</label>
+            <select name="Gender" required>
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <!-- Cancer Details -->
+        <div class="section">
+            <h3>Cancer Details</h3>
+            <label>Cancer Type:</label>
+            <select name="Cancer Type" required>
+                <option value="Gastric Cancer">Gastric Cancer</option>
+                <option value="Duodenal Cancer">Duodenal Cancer</option>
+                <option value="Esophageal Cancer">Esophageal Cancer</option>
+                <option value="Pancreatic Cancer">Pancreatic Cancer</option>
+                <option value="Colon Cancer" selected>Colon Cancer</option>
+                <option value="Central Nervous System (CNS) Cancers">Central Nervous System (CNS) Cancers</option>
+                <option value="Lung">Lung</option>
+                <option value="Breast Cancer">Breast Cancer</option>
+                <option value="Ovarian Cancer">Ovarian Cancer</option>
+                <option value="Cervical Cancer">Cervical Cancer</option>
+                <option value="Prostate Cancer">Prostate Cancer</option>
+                <option value="Skin Cancers">Skin Cancers</option>
+            </select>
+
+            <label>Tumor Size (L x B x W):</label>
+            <input type="text" name="Tumor Size (L * B * W)" value="1.7x4.8x3.0" required>
+
+            <label>Cancer Stage:</label>
+            <select name="Cancer Stage" required>
+                <option value="Stage I">Stage I</option>
+                <option value="Stage II">Stage II</option>
+                <option value="Stage III" selected>Stage III</option>
+                <option value="Stage IV">Stage IV</option>
+            </select>
+
+            <label>Grade:</label>
+            <select name="Grade" required>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+
+            <label>Pathologic Stage (TNM):</label>
+            <input type="text" name="Pathologic Stage (TNM)" value="T1N0M0" required>
+
+            <label>Tumor Extent:</label>
+            <select name="Tumor Extent" required>
+                <option value="Confined to mucosa">Confined to mucosa</option>
+                <option value="Invading submucosa">Invading submucosa</option>
+                <option value="Reaching serosa" selected>Reaching serosa</option>
+                <option value="In situ">In situ</option>
+            </select>
+
+            <!-- Replace only the Histologic Type input block with this -->
+<label>Histologic Type:</label>
+<select name="Histologic Type" required>
+    <option value="Adenocarcinoma" selected>Adenocarcinoma</option>
+    <option value="Squamous Cell Carcinoma">Squamous Cell Carcinoma</option>
+    <option value="Serous Carcinoma">Serous Carcinoma</option>
+    <option value="Clear Cell Carcinoma">Clear Cell Carcinoma</option>
+</select>
+
+        </div>
+
+        <!-- Genetic Data -->
+        <div class="section">
+            <h3>Genomic & Biomarker Data</h3>
+            <label>Genetic Mutation(s):</label>
+            <input type="text" name="Genetic Mutation(s)" value="HER2,BRAF,ERBB2,KRAS" required>
+
+            <label>Biomarkers:</label>
+            <input type="text" name="Biomarkers" value="MSI+" required>
+
+            <label>Copy Number Variation:</label>
+            <input type="text" name="Copy Number Variation" value="BRAF:Amplified" required>
+
+            <label>Tumor Mutation Burden (TMB):</label>
+            <select name="Tumor Mutation Burden (TMB)" required>
+                <option value="Low" selected>Low</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="High">High</option>
+            </select>
+
+            <label>Methylation Profile:</label>
+            <select name="Methylation Profile" required>
+                <option value="Hypermethylated" selected>Hypermethylated</option>
+                <option value="Hypomethylated">Hypomethylated</option>
+            </select>
+
+            <label>Fusion Gene(s):</label>
+            <input type="text" name="Fusion Gene(s)" value="BCR-ABL1,TMPRSS2-ERG" required>
+
+            <label>Gene Expression Profile:</label>
+            <select name="Gene Expression Profile" required>
+                <option value="overexposed" selected>overexposed</option>
+                <option value="downregulated">downregulated</option>
+                <option value="lowexpression">lowexpression</option>
+                <option value="normalexpression">normalexpression</option>
+                <option value="invasive profile">invasive profile</option>
+                <option value="Stable profile">Stable profile</option>
+            </select>
+        </div>
+
+        <!-- Lifestyle and History -->
+        <div class="section">
+            <h3>Lifestyle & Medical History</h3>
+            <label>Family History:</label>
+            <select name="Family History" required>
+                <option value="Yes">Yes</option>
+                <option value="No" selected>No</option>
+            </select>
+
+            <label>Smoking & Alcohol:</label>
+            <select name="Smoking & Alcohol" required>
+                <option value="Smoker">Smoker</option>
+                <option value="Alcoholic" selected>Alcoholic</option>
+                <option value="Both">Both</option>
+                <option value="None">None</option>
+            </select>
+
+            <label>Previous Cancer Treatment(s):</label>
+            <select name="Previous Cancer Treatment(s)" required>
+                <option value="Chemotherapy">Chemotherapy</option>
+                <option value="Radiation">Radiation</option>
+                <option value="Surgery">Surgery</option>
+                <option value="Hormone Therapy">Hormone Therapy</option>
+                <option value="None" selected>None</option>
+            </select>
+        </div>
+
+        <input type="submit" class="submit-btn" value="Predict">
+    </form>
+
+    {% if prediction %}
+    <div class="prediction">
+        <p>🔍 Predicted Treatment Response: <strong>{{ prediction }}</strong></p>
+    </div>
+    {% endif %}
+</div>
+</body>
+
+</html>
